@@ -31,7 +31,7 @@ export default function Home() {
     document.getElementById("fileInput").click(); // Memanggil input file secara otomatis
   };
   const handleDownload = async () => {
-    const canvas = await (await html2canvas(document.getElementById("qrCanvas"))).toDataURL();
+    const canvas = await (await html2canvas(document.getElementById("canvas"))).toDataURL();
     if (canvas) {
       const a = document.createElement("a");
       a.download = "QrCode.png";
@@ -76,8 +76,8 @@ export default function Home() {
       </div>
       <div className="col-span-12 lg:col-span-6  h-full flex items-center justify-center bg-[#2A3D82] py-10">
         <div className="bg-white p-7  w-9/12 mx-10 lg:w-8/12 rounded-[26px] flex flex-col gap-4">
-          <div className="w-full   p-4">
-            <div id="canvas" className="w-full h-full flex justify-center items-center bg-transparent overflow-hidden ">
+          <div className="w-full bg-transparent   p-4">
+            <div id="canvas" className="w-full py-4 h-full flex justify-center items-center bg-transparent overflow-hidden ">
               <QRCodeCanvas
                 value={value}
                 title={"Title for my QR Code"}
@@ -98,6 +98,7 @@ export default function Home() {
             </div>
           </div>
           <Button
+            type="button"
             onClick={handleDownload}
             className={`bg-[#4777FF] flex items-center font-bold text-[16px] p-6 gap-4 rounded-full shadow-lg border-[3px] border-white ${
               value === "" && " pointer-events-none opacity-50"
