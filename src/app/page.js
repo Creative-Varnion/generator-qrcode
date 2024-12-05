@@ -13,7 +13,6 @@ export default function Home() {
   const [value, setValue] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  const qrCodeRef = useRef(null);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -53,7 +52,7 @@ export default function Home() {
           <form className="mt-4 w-full ">
             <div className="w-full flex flex-col lg:flex-row lg:items-center gap-3">
               <div className="w-full lg:w-8/12 ">
-                <Label>Submit URL or text</Label>
+                <Label>Submit URL or text (https://)</Label>
                 <Input
                   onChange={(e) => setValue(e.target.value)}
                   value={value}
@@ -73,6 +72,7 @@ export default function Home() {
             </div>
           </form>
         </div>
+        <span className="absolute bottom-3 hidden lg:block">Copyright ©2025 PT. Varnion Technology Semesta</span>
       </div>
       <div className="col-span-12 lg:col-span-6  h-full flex items-center justify-center bg-[#2A3D82] py-10">
         <div className="bg-white p-7  w-9/12 mx-10 lg:w-8/12 rounded-[26px] flex flex-col gap-4">
@@ -99,13 +99,16 @@ export default function Home() {
           </div>
           <Button
             type="button"
-            onClick={handleDownload}
+            onClick={() => handleDownload()}
             className={`bg-[#4777FF] flex items-center font-bold text-[16px] p-6 gap-4 rounded-full shadow-lg border-[3px] border-white ${
               value === "" && " pointer-events-none opacity-50"
             } `}>
             Download <Download />
           </Button>
         </div>
+      </div>
+      <div className="lg:hidden col-span-12 py-3 bg-[#2A3D82] lg:col-span-6 h-full justify-center flex items-end">
+        <span className="bottom-0 lg:hidden text-white">Copyright ©2025 PT. Varnion Technology Semesta</span>
       </div>
     </div>
   );
