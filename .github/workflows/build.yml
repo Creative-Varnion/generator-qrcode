@@ -100,7 +100,7 @@ jobs:
       - name: Trigger updater with curl
         shell: bash
         run: |
-          for f in ${{ variables.UPDATE_SERVER }}; do
+          for f in ${{ vars.UPDATE_SERVER }}; do
             curl -sS "$f/v1/update" \
               -H "Authorization: Bearer ${{ secrets.UPDATE_TOKEN }}"
           done
