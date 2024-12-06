@@ -7,11 +7,11 @@ name: Default workflow
 
 on:
   push:
-    branches: ['main', 'staging/deployment']
+    branches: ['main', 'deployment']
     # Publish semver tags as releases.
     tags: ['v*.*.*']
   pull_request:
-    branches: ['staging/deployment']
+    branches: ['deployment']
 
 env:
   # Use docker.io for Docker Hub if empty
