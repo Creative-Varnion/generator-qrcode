@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import html2canvas from "html2canvas";
+import { X } from "lucide-react";
 import { ImageIcon } from "lucide-react";
 import { Download } from "lucide-react";
 import Image from "next/image";
@@ -16,6 +17,7 @@ export default function Home() {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
+    console.log(file);
     if (file) {
       setImage(file);
       const reader = new FileReader();
@@ -49,10 +51,10 @@ export default function Home() {
         </div>
         <div>
           <h6 className="font-bold text-[24px] text-[#2A3D82]">Create QR Code in 1 Step</h6>
-          <form className="mt-4 w-full ">
+          <div className="mt-4 w-full ">
             <div className="w-full flex flex-col lg:flex-row lg:items-center gap-3">
               <div className="w-full lg:w-8/12 ">
-                <Label>Submit URL or text (https://)</Label>
+                <Label>Submit text or URL (https://)</Label>
                 <Input
                   onChange={(e) => setValue(e.target.value)}
                   value={value}
@@ -62,15 +64,30 @@ export default function Home() {
               </div>
               <div className="w-full lg:w-4/12 flex flex-col gap-4">
                 <Label>Image (optional)</Label>
-                <div
-                  onClick={handleUpdateImage}
-                  className="w-3/12 lg:w-4/12 border-[1px] overflow-hidden h-20 lg:h-14 bg-transparent flex items-center justify-center  rounded-lg cursor-pointer">
-                  {imagePreview ? <Image src={imagePreview} alt="img" width={1000} height={1000} className="w-10 object-cover  " /> : <ImageIcon />}
-                  <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+
+                <div className="relative w-4/12 ">
+                  <div
+                    onClick={handleUpdateImage}
+                    className=" w-full border-[1px] overflow-hidden h-20 lg:h-14 bg-transparent flex items-center justify-center  rounded-lg cursor-pointer">
+                    {imagePreview ? <Image src={imagePreview} alt="img" width={1000} height={1000} className="w-10 object-cover  " /> : <ImageIcon />}
+
+                    <input id="fileInput" type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
+                  </div>
+                  {imagePreview && (
+                    <button
+                      type="button"
+                      className=" absolute  hover:bg-white  top-0 right-0 text-white space-x-40 bg-[#2A3D82] p-1 rounded-full"
+                      onClick={() => {
+                        setImage(null);
+                        setImagePreview(null);
+                      }}>
+                      <X className="w-2 h-2" />
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         <span className="absolute bottom-3 hidden lg:block">Copyright ©2025 PT. Varnion Technology Semesta</span>
       </div>
